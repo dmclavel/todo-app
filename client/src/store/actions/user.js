@@ -73,6 +73,7 @@ export const login = (email, password) => {
     return dispatch => {
         axios.post('/users/login', { email, password })
             .then(user => {
+                console.log(user);
                 localStorage.setItem('userId', user.headers['x-auth']);
                 dispatch(loginSuccess(user.data.email,user.headers['x-auth'], user.data._id));
             })

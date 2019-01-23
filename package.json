@@ -1,0 +1,17 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/dmclavel/todo-app.git",
+  "scripts": {
+    "start-client": "cd client && yarn start",
+    "start-server": "cd server && yarn start",
+    "dev": "concurrently \"yarn start-server\" \"yarn start-client\"",
+    "start": "yarn start-client"
+  },
+  "author": "dmclavel <dmclavel@up.edu.ph>",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
