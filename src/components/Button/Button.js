@@ -2,12 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ButtonWrapper = styled.button`
-    margin: 0 1.5rem 0 0.5rem;
+    font-family: 'Lora', serif;
+    border-radius: 10px;
+    border-style: none;
+    height: ${props => props.style.height};
+    width: ${props => props.style.width};
+    margin: ${props => props.style.margin};
+    cursor: pointer;
+    outline: none;
 `
 
 const button = (props) => {
     return (
-        <ButtonWrapper>
+        <ButtonWrapper style={props.style}>
             {props.buttonName}
         </ButtonWrapper>
     );

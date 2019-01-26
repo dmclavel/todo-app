@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { authListen } from './store/actions/index';
 
 import Navbar from './containers/Navbar/Navbar';
+import Footer from './containers/Footer/Footer';
 import Home from './containers/Home/Home';
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
       <div>
         <Navbar />
         <Home />
+        <Footer />
       </div>  
     );
   }
