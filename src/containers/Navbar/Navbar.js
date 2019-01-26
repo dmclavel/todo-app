@@ -99,7 +99,7 @@ class Navbar extends Component {
                             event.preventDefault();
                             this.props.onLogout();
                         }}>
-                            <Button buttonName="Log out" />
+                            <Button buttonName="Log out" style={buttonInlineStyle} />
                         </form>
                     </NavRight>
                 </NavWrapper>
