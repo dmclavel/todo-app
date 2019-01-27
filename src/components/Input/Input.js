@@ -22,7 +22,8 @@ const InputWrapper = styled.input`
 const input = (props) => {
     return (
         <InputWrapper placeholder={props.placeholder} value={props.value} 
-            onChange={props.changed} style={props.style} type={props.type} />
+            onChange={props.changed} style={props.style} type={props.type} 
+            name={props.name} checked={props.checked} />
     );
 };
 

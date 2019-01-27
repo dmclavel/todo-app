@@ -3,29 +3,45 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     uid: null,
     creatorId: null,
+    username: null,
     email: null,
     loginError: null,
-    signupError: null
+    signupError: null,
+    authListen: false,
+    authDone: false
 };
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
+        case actionTypes.STARTAUTHLISTEN: 
+            return {
+                ...state,
+                authListen: true
+            }
         case actionTypes.AUTHENTICATED:
             return {
                 ...state,
                 uid: action.token,
                 creatorId: action.creatorId,
+                username: action.username,
                 email: action.email,
                 loginError: null,
-                signupError: null
+                signupError: null,
+                authListen: false,
+                authDone: true
             }
         case actionTypes.UNAUTHENTICATED:
-            return state;
+            return {
+                ...state,
+                authListen: false,
+                authDone: true
+            }
         case actionTypes.LOGINSUCCESS:
             return {
                 ...state,
                 uid: action.token,
                 creatorId: action.creatorId,
+                username: action.username,
                 email: action.email,
                 loginError: null
             };
@@ -39,6 +55,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 uid: action.token,
                 creatorId: action.creatorId,
+                username: action.username,
                 email: action.email,
                 signupError: null
             };
@@ -52,6 +69,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 uid: null,
                 creatorId: null,
+                username: null,
                 email: null,
                 loginError: null,
                 signupError: null

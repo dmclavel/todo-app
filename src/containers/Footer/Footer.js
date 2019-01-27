@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import GithubImg from '../../assets/github.png';
 import TwitterImg from '../../assets/twitter.png';
@@ -13,7 +15,6 @@ const FooterWrapper = styled.div`
     height: 12rem;
     width: 90%;
     position: absolute;
-    top: 89%;
     left: 5%;
     border-radius: 25px;
 `
@@ -21,11 +22,10 @@ const FooterWrapper = styled.div`
 const FooterLeft = styled.div`
     display: inline-flex;
     flex-direction: column;
-    width: 40%;
+    width: 60%;
     align-items: center;
     position: absolute;
-    top: 5%;
-    right: 50%;
+    left: 40%;
 `
 
 const LeftContainer = styled.div`
@@ -50,9 +50,17 @@ const Link = styled.a`
 `
 
 class Footer extends Component {
+    componentDidMount() {
+        console.log(this.props);
+    }
+
     render () {
         return (
-            <FooterWrapper>
+            <FooterWrapper style={{
+                backgroundColor: this.props.uid && this.props.location.pathname !== '/' ? '#355C7D' : '',
+                top: this.props.uid && this.props.location.pathname !== '/' ? '85%' : '89%',
+                margin: this.props.uid && this.props.location.pathname !== '/' ? '-60px 0' : '0'
+            }}>
                 <FooterLeft>
                     <LeftContainer>
                         <ProductIcon src={GithubImg} alt="git-icon" />
@@ -60,7 +68,7 @@ class Footer extends Component {
                     </LeftContainer>
                     <LeftContainer style={{marginTop: '20px'}}>
                         <ProductIcon src={TwitterImg} alt="twitter-icon" />
-                        <Link href="https://github.com/dmclavel/todo-app" target="no_blank"> Todo App Twitter Page </Link>
+                        <Link href="https://twitter.com/DmcTodo" target="no_blank"> Todo App Twitter Page </Link>
                     </LeftContainer>
                     <LeftContainer style={{marginTop: '20px'}}>
                         <ProductIcon src={EmailImg} alt="email-icon" />
@@ -72,4 +80,10 @@ class Footer extends Component {
     }
 }
 
-export default Footer;
+const mapStateToProps = state => {
+    return {
+        uid: state.user.uid
+    }
+};
+
+export default withRouter(connect(mapStateToProps)(Footer));

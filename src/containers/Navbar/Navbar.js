@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login, logout } from '../../store/actions/index';
 
+import ProfileSettings from '../../components/ProfileSettings/ProfileSettings';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import TodoLogo from '../../assets/todo-logo.png';
+import ProfileIcon from '../../assets/man-icon.png';
 
 const NavWrapper = styled.nav`
     font-family: 'Lora', serif;
@@ -43,6 +46,7 @@ const NavLeftAppName = styled.span`
 const NavRight = styled.div`
     display: inline-flex;
     justify-content: flex-end;
+    position: relative;
     width: 80%;
 `
 
@@ -53,6 +57,13 @@ const NavRightElement = styled.div`
     justify-content: space-around;
     height: 3rem;
     margin: 0 0.5rem;
+`
+
+const NavProfileIcon = styled.img`
+    height: 3.5rem;
+    width: 3.5rem;
+    margin-right: 2rem;
+    cursor: pointer;
 `
 
 const inputInlineStyle = {
@@ -74,7 +85,8 @@ class Navbar extends Component {
         super(props);
         this.state = {
             localEmail: '',
-            localPass: ''
+            localPass: '',
+            showSettings: false
         };
         this.emailChanged = this.emailChanged.bind(this);
         this.passwordChanged = this.passwordChanged.bind(this);
@@ -88,23 +100,36 @@ class Navbar extends Component {
         this.setState({ localPass: e.target.value });
     }
 
+    triggerSettings = () => {
+        this.setState(prevState => ({ showSettings: !prevState.showSettings }));
+    }
+
+    login = async () => {
+        await this.props.onLogin(this.state.localEmail, this.state.localPass);
+        if (this.props.uid) this.props.history.push('/todo');
+    }
+
+    logout = async () => {
+        await this.props.onLogout();
+        window.location.reload(false);
+    }
+
     render () {
         let navContent;
-        if (this.props.uid) {
+        if (this.props.uid && !this.props.authListen && this.props.authDone) {
             navContent = (
                 <NavWrapper>
+                    <NavLeft>
+                        <NavLeftLogo src={TodoLogo} alt="todo-logo" />
+                        <NavLeftAppName> DMC - Todo App </NavLeftAppName>
+                    </NavLeft>
                     <NavRight>
-                        <span>{this.props.email}</span>
-                        <form onSubmit={(event) => {
-                            event.preventDefault();
-                            this.props.onLogout();
-                        }}>
-                            <Button buttonName="Log out" style={buttonInlineStyle} />
-                        </form>
+                        <NavProfileIcon onClick={this.triggerSettings} src={ProfileIcon} alt="man-icon" />
+                        {this.state.showSettings ? <ProfileSettings username={this.props.username} email={this.props.email} clicked={this.logout} /> : null}
                     </NavRight>
                 </NavWrapper>
             );
-        } else {
+        } else if (!this.props.uid && !this.props.authListen && this.props.authDone) {
             navContent = (
                 <NavWrapper>
                     <NavLeft>
@@ -114,7 +139,7 @@ class Navbar extends Component {
                     <NavRight>
                         <form onSubmit={(event) => {
                             event.preventDefault();
-                            this.props.onLogin(this.state.localEmail, this.state.localPass);
+                            this.login();
                         }}>
                             <NavRightElement>
                                 <span style={{color: '#fff', padding: '0 0.2rem'}}> E-mail </span>
@@ -132,7 +157,8 @@ class Navbar extends Component {
                     </NavRight>
                 </NavWrapper>
             );
-        }
+        } else 
+            navContent = null;
 
         return navContent;
     }
@@ -141,7 +167,10 @@ class Navbar extends Component {
 const mapStateToProps = state => {
     return {
         uid: state.user.uid,
-        email: state.user.email
+        username: state.user.username,
+        email: state.user.email,
+        authListen: state.user.authListen,
+        authDone: state.user.authDone
     }
 };
 
@@ -152,4 +181,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));

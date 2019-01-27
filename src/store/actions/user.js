@@ -1,9 +1,10 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../config/axios';
 
-const loginSuccess = (email, token, creatorId) => {
+const loginSuccess = (username, email, token, creatorId) => {
     return {
         type: actionTypes.LOGINSUCCESS,
+        username,
         email, 
         token,
         creatorId
@@ -17,9 +18,10 @@ const loginFailed = (error) => {
     }
 };
 
-const signupSuccess = (email, token, creatorId) => {
+const signupSuccess = (username, email, token, creatorId) => {
     return {
         type: actionTypes.SIGNUPSUCCESS,
+        username,
         email, 
         token,
         creatorId
@@ -39,9 +41,16 @@ const logoutSuccess = () => {
     }
 };
 
-const authenticated = (email, token, creatorId) => {
+const startAuthListen = () => {
+    return {
+        type: actionTypes.STARTAUTHLISTEN
+    }
+};
+
+const authenticated = (username, email, token, creatorId) => {
     return {
         type: actionTypes.AUTHENTICATED,
+        username,
         email,
         token,
         creatorId
@@ -56,12 +65,13 @@ const unauthenticated = () => {
 
 export const authListen = () => {
     return dispatch => {
+        dispatch(startAuthListen());
         axios.get('/users/me', { headers: { "x-auth": localStorage.getItem('userId') } })
             .then(user => {
                 if (user.data === "")
                     dispatch(unauthenticated());
                 else 
-                    dispatch(authenticated(user.data.email, user.config.headers['x-auth'], user.data._id));
+                    dispatch(authenticated(user.data.username, user.data.email, user.config.headers['x-auth'], user.data._id));
             })
             .catch(() => {
                 dispatch(unauthenticated());
@@ -70,11 +80,11 @@ export const authListen = () => {
 };
 
 export const login = (email, password) => {
-    return dispatch => {
-        axios.post('/users/login', { email, password })
+    return async dispatch => {
+        await axios.post('/users/login', { email, password })
             .then(user => {
                 localStorage.setItem('userId', user.headers['x-auth']);
-                dispatch(loginSuccess(user.data.email,user.headers['x-auth'], user.data._id));
+                dispatch(loginSuccess(user.data.username, user.data.email,user.headers['x-auth'], user.data._id));
             })
             .catch(() => {
                 dispatch(loginFailed('Password and email don\'t match'));
@@ -83,12 +93,12 @@ export const login = (email, password) => {
     }
 };
 
-export const signup = (email, password) => {
+export const signup = (username, email, password) => {
     return dispatch => {
-        axios.post('/users', { email, password })
+        axios.post('/users', { username, email, password })
             .then(user => {
                 localStorage.setItem('userId', user.headers['x-auth']);
-                dispatch(signupSuccess(user.data.email,user.headers['x-auth'], user.data._id));
+                dispatch(signupSuccess(user.data.username, user.data.email,user.headers['x-auth'], user.data._id));
             })
             .catch(() => {
                 dispatch(signupFailed('Email already exists!'));
@@ -97,8 +107,8 @@ export const signup = (email, password) => {
 };
 
 export const logout = () => {
-    return dispatch => {
-        axios.delete('/users/me/token', {
+    return async dispatch => {
+        await axios.delete('/users/me/token', {
             headers: {
                 "x-auth": localStorage.getItem('userId')
             }

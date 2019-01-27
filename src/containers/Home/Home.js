@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signup } from '../../store/actions/index';
 
@@ -89,43 +90,42 @@ class Home extends Component {
     }
 
     render () {
-        let homeContent;
-        if (this.props.uid) {
-            homeContent = <HomeWrapper> AUTHENTICATED </HomeWrapper>
-        } else {
-            homeContent = (
-                <HomeWrapper>
-                    <ImgDarker>
-                        <HomeImg src={HomeImage} alt="home-image" />
-                    </ImgDarker>
-                    <SignupWrapper onSubmit={(event) => {
-                            event.preventDefault();
-                            this.props.onSignup(this.state.localEmail, this.state.localPass);
-                        }}>
-                        <SpanWrapper> REGISTER AN ACCOUNT! </SpanWrapper>
-                        <Input type="text" placeholder="Username" value={this.state.localUsername} changed={this.usernameChanged} style={inputInlineStyle} />
-                        <Input type="email" placeholder="E-mail" value={this.state.localEmail} changed={this.emailChanged} style={inputInlineStyle} />
-                        <Input type="password" placeholder="Password" value={this.state.localPass} changed={this.passwordChanged} style={inputInlineStyle} />
-                        <Button buttonName="Sign up" style={buttonInlineStyle} />
-                    </SignupWrapper>
-                </HomeWrapper>
-            );
-        }
-        
-        return homeContent;
+        let homeRedirect = null;
+        if (this.props.uid && !this.props.authListen && this.props.authDone)
+            homeRedirect = <Redirect to="/todo" />;
+
+        return (
+            <HomeWrapper>
+                {homeRedirect}
+                <ImgDarker>
+                    <HomeImg src={HomeImage} alt="home-image" />
+                </ImgDarker>
+                <SignupWrapper onSubmit={(event) => {
+                        event.preventDefault();
+                        this.props.onSignup(this.state.localUsername, this.state.localEmail, this.state.localPass);
+                    }}>
+                    <SpanWrapper> REGISTER AN ACCOUNT! </SpanWrapper>
+                    <Input type="text" placeholder="Username" value={this.state.localUsername} changed={this.usernameChanged} style={inputInlineStyle} />
+                    <Input type="email" placeholder="E-mail" value={this.state.localEmail} changed={this.emailChanged} style={inputInlineStyle} />
+                    <Input type="password" placeholder="Password" value={this.state.localPass} changed={this.passwordChanged} style={inputInlineStyle} />
+                    <Button buttonName="Sign up" style={buttonInlineStyle} />
+                </SignupWrapper>
+            </HomeWrapper>
+        );
     }
 }
 
 const mapStateToProps = state => {
     return {
         uid: state.user.uid,
-        email: state.user.email
+        authListen: state.user.authListen,
+        authDone: state.user.authDone
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSignup: (email, password) => dispatch(signup(email, password))
+        onSignup: (username, email, password) => dispatch(signup(username, email, password))
     }
 };
 
