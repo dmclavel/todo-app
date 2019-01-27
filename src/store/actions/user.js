@@ -81,7 +81,7 @@ export const authListen = () => {
 
 export const login = (email, password) => {
     return dispatch => {
-        axios.post('/users/login', { email, password })
+        axios.post('/users/login', { email, password }, { headers: { 'Accept': 'application/json' }})
             .then(user => {
                 console.log(user);
                 localStorage.setItem('userId', user.headers['x-auth']);
