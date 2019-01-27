@@ -125,7 +125,7 @@ class Todo extends Component {
         if (!this.props.uid && !this.props.authListen && this.props.authDone) {
             todoRedirect = <Redirect to="/" />;
         } else if (this.props.uid && !this.props.authListen && this.props.authDone) {
-            taskList = this.props.todos.map(todo => {
+            taskList = this.props.todos !== undefined ? this.props.todos.map(todo => {
                 return !todo.completed ? (
                     <TodoIndv key={todo._id}>
                         <Input type="checkbox" name="todo" style={inputInlineStyle} value="todo_val" changed={() => this.props.onPatchTodo(todo._id, todo.completed)} />
@@ -134,8 +134,8 @@ class Todo extends Component {
                         <HelperIcon right="3rem" className="material-icons"> edit </HelperIcon>
                     </TodoIndv>
                 ) : null;
-            });
-            completedList = this.props.todos.map(todo => {
+            }) : null;
+            completedList = this.props.todos !== undefined ? this.props.todos.map(todo => {
                 return todo.completed ? (
                     <TodoIndv key={todo._id}>
                         <Input type="checkbox" name="todo" style={inputInlineStyle} value="todo_val" changed={() => this.props.onPatchTodo(todo._id, todo.completed)} checked={todo.completed} />
@@ -144,7 +144,7 @@ class Todo extends Component {
                         <HelperIcon right="3rem" className="material-icons"> edit </HelperIcon>
                     </TodoIndv>
                 ) : null;
-            });
+            }) : null;
             todoContent = (
                 <TodoWrapper>
                     <TodoElementSeparate> 
