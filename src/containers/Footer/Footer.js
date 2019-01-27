@@ -50,10 +50,6 @@ const Link = styled.a`
 `
 
 class Footer extends Component {
-    componentDidMount() {
-        console.log(this.props);
-    }
-
     render () {
         return (
             <FooterWrapper style={{

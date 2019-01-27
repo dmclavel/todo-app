@@ -89,6 +89,15 @@ class Home extends Component {
         this.setState({ localPass: e.target.value });
     }
 
+    clearLocalSignupState = () => {
+        this.setState({ localUsername: '', localEmail: '', localPass: '' });
+    }
+
+    signup = () => {
+        this.clearLocalSignupState();
+        this.props.onSignup(this.state.localUsername, this.state.localEmail, this.state.localPass);
+    }
+
     render () {
         let homeRedirect = null;
         if (this.props.uid && !this.props.authListen && this.props.authDone)
@@ -102,7 +111,7 @@ class Home extends Component {
                 </ImgDarker>
                 <SignupWrapper onSubmit={(event) => {
                         event.preventDefault();
-                        this.props.onSignup(this.state.localUsername, this.state.localEmail, this.state.localPass);
+                        this.signup();
                     }}>
                     <SpanWrapper> REGISTER AN ACCOUNT! </SpanWrapper>
                     <Input type="text" placeholder="Username" value={this.state.localUsername} changed={this.usernameChanged} style={inputInlineStyle} />

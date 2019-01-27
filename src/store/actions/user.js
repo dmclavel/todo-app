@@ -80,10 +80,9 @@ export const authListen = () => {
 };
 
 export const login = (email, password) => {
-    return dispatch => {
-        axios.post('/users/login', { email, password })
+    return async dispatch => {
+        await axios.post('/users/login', { email, password })
             .then(user => {
-                console.log(user);
                 localStorage.setItem('userId', user.headers['x-auth']);
                 dispatch(loginSuccess(user.data.username, user.data.email,user.headers['x-auth'], user.data._id));
             })
@@ -98,7 +97,6 @@ export const signup = (username, email, password) => {
     return dispatch => {
         axios.post('/users', { username, email, password })
             .then(user => {
-                console.log(user);
                 localStorage.setItem('userId', user.headers['x-auth']);
                 dispatch(signupSuccess(user.data.username, user.data.email,user.headers['x-auth'], user.data._id));
             })

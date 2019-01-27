@@ -104,9 +104,15 @@ class Navbar extends Component {
         this.setState(prevState => ({ showSettings: !prevState.showSettings }));
     }
 
+    clearLocalLoginState = () => {
+        this.setState({ localEmail: '', localPass: '' });
+    }
+
     login = async () => {
         await this.props.onLogin(this.state.localEmail, this.state.localPass);
+        this.props.clearLocalLoginState();
         if (this.props.uid) this.props.history.push('/todo');
+        window.location.reload(false);
     }
 
     logout = async () => {
