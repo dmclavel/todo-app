@@ -33,6 +33,12 @@ const reducer = (state = initialState, action) => {
         case actionTypes.UNAUTHENTICATED:
             return {
                 ...state,
+                uid: null,
+                creatorId: null,
+                username: null,
+                email: null,
+                loginError: null,
+                signupError: null,
                 authListen: false,
                 authDone: true
             }
