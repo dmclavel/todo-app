@@ -68,7 +68,7 @@ export const authListen = () => {
         dispatch(startAuthListen());
         axios.get('/users/me', { headers: { "x-auth": localStorage.getItem('userId') } })
             .then(user => {
-                if (user.data === "")
+                if (user.data === "" && user.config.headers['x-auth'] === undefined)
                     dispatch(unauthenticated());
                 else 
                     dispatch(authenticated(user.data.username, user.data.email, user.config.headers['x-auth'], user.data._id));
@@ -81,7 +81,7 @@ export const authListen = () => {
 
 export const login = (email, password) => {
     return dispatch => {
-        axios.post('/users/login', { email, password }, { headers: { 'Accept': 'application/json' }})
+        axios.post('/users/login', { email, password })
             .then(user => {
                 console.log(user);
                 localStorage.setItem('userId', user.headers['x-auth']);
