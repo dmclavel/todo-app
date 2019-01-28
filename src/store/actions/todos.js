@@ -60,7 +60,6 @@ export const fetchTodos = () => {
     return dispatch => {
         axios.get('/todos', { headers: { "x-auth": localStorage.getItem('userId') } })
             .then(todos => {
-                console.log(todos.data.todos);
                 dispatch(fetchTodosSuccess(todos.data.todos));
             }).catch(err => {
                 dispatch(fetchTodosFailed(err.message));
