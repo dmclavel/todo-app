@@ -8,55 +8,30 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
+What things you need to install the software and how to install them.
+Go to the project's root directory, then run:
 ```
-Go to the project's root directory, then run > npm install / yarn
-```
-```
-To start the project in development mode, run > npm run dev / yarn dev
-```
-```
-To build the project for production, run > npm build / yarn build. 
-To test if production works properly, run > npm start / yarn start.
+npm install or yarn
 ```
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+A step by step series of examples that tell you how to get a development env running.
+To start the project in development mode, run:
 
 ```
-until finished
+npm run dev or yarn dev
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Meanwhile, to ship the application for production. Build it first by running:
 
 ```
-Give an example
+npm build or yarn build
+```
+To test if production works properly, run:
+```
+npm start or yarn start
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
@@ -64,9 +39,10 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [React JS](https://reactjs.org/docs/getting-started.html) - The web framework used
+* [NPM](https://www.npmjs.com/) - Dependency Management
+* [Node JS](https://nodejs.org/en/docs/) - Back-end framework used
+* [MongoDB](https://www.mongodb.com/what-is-mongodb) - Database used
 
 ## Contributing
 
@@ -78,7 +54,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Daimler Clavel** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
