@@ -6,7 +6,7 @@ This application has been developed through the MERN tech stack. The use of a no
 
 Powered by:
 
-  MongoDB
-  Express
-  Node
-  React
+  MongoDB\n
+  Express\n
+  Node\n
+  React\n
