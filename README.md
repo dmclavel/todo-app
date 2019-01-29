@@ -50,13 +50,13 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/dmclavel/todo-app/tags). 
 
 ## Authors
 
-* **Daimler Clavel** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Daimler Clavel**
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/dmclavel/todo-app/contributors) who participated in this project.
 
 ## License
 
