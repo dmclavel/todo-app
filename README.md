@@ -1,6 +1,6 @@
 # Project Title
 
-* **DMC - Todo Application**
+  **DMC - Todo Application**
 
 ## Getting Started
 
