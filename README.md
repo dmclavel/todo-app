@@ -11,9 +11,15 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 
 ```
-Give examples
+Go to the project's root directory, then run > npm install / yarn
 ```
-
+```
+To start the project in development mode, run > npm run dev / yarn dev
+```
+```
+To build the project for production, run > npm build / yarn build. 
+To test if production works properly, run > npm start / yarn start.
+```
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
