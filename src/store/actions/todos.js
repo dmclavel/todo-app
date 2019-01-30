@@ -15,9 +15,10 @@ const fetchTodosFailed = error => {
     }
 };
 
-const writeTodosSuccess = () => {
+const writeTodosSuccess = (todos) => {
     return {
-        type: actionTypes.WRITETODOSSUCCESS
+        type: actionTypes.WRITETODOSSUCCESS,
+        todos
     }
 };
 
@@ -28,10 +29,10 @@ const writeTodosFailed = (error) => {
     }
 };
 
-const deleteTodoSuccess = (msg) => {
+const deleteTodoSuccess = (todos) => {
     return {
         type: actionTypes.DELETETODOSUCCESS,
-        msg
+        todos
     }
 };
 
@@ -42,10 +43,10 @@ const deleteTodoFailed = (msg) => {
     }
 };
 
-const patchTodoSuccess = (msg) => {
+const patchTodoSuccess = (todos) => {
     return {
         type: actionTypes.PATCHTODOSUCCESS,
-        msg
+        todos
     }
 };
 
@@ -70,7 +71,9 @@ export const fetchTodos = () => {
 export const writeTodos = (todo) => {
     return dispatch => {
         axios.post('/todos', { text: todo }, { headers: { "x-auth": localStorage.getItem('userId') } })
-            .then(() => dispatch(writeTodosSuccess()))
+            .then(todos => {
+                dispatch(writeTodosSuccess(todos.data));
+            })
             .catch(err => dispatch(writeTodosFailed(err.message)));
     }
 };
@@ -78,7 +81,9 @@ export const writeTodos = (todo) => {
 export const deleteTodo = (id) => {
     return dispatch => {
         axios.delete(`/todos/${id}`, { headers: { "x-auth": localStorage.getItem('userId') } })
-            .then(() => dispatch(deleteTodoSuccess('Task has been deleted!')))
+            .then(todos => {
+                dispatch(deleteTodoSuccess(todos.data));
+            })
             .catch(err => dispatch(deleteTodoFailed(err.message)));
     }
 };
@@ -86,7 +91,7 @@ export const deleteTodo = (id) => {
 export const patchTodo = (id, completed) => {
     return dispatch => {
         axios.patch(`/todos/${id}`, { completed: !completed }, { headers: { "x-auth": localStorage.getItem('userId') } })
-            .then(() => dispatch(patchTodoSuccess('Succesfully updated!')))
+            .then(todos => dispatch(patchTodoSuccess(todos.data)))
             .catch(err => dispatch(patchTodoFailed(err.message)));
     }
 };

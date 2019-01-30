@@ -15,12 +15,12 @@ const HomeWrapper = styled.div`
 `
 
 const ImgDarker = styled.div`
-    position: absolute;
+    position: fixed;
     z-index: -1;
     background-color: #000;
     overflow: initial;
     width: 100%;
-    height: 67rem;
+    height: 100%;
 `
 
 const SignupWrapper = styled.form`
@@ -32,9 +32,8 @@ const SignupWrapper = styled.form`
 `
 
 const HomeImg = styled.img `
-    position: absolute;
     width: 100%;
-    height: 67rem;
+    height: 100%;
     opacity: 0.4;
 `
 

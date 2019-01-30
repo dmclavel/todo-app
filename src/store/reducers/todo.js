@@ -3,9 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     todos: [],
     writeError: null,
-    deleteSuccessMsg: null,
     deleteFailedMsg: null,
-    patchSuccessMsg: null,
     patchFailedMsg: null
 };
 
@@ -24,7 +22,8 @@ const reducer = (state = initialState, action) => {
         case actionTypes.WRITETODOSSUCCESS:
             return {
                 ...state,
-                writeError: null
+                writeError: null,
+                todos: action.todos
             }
         case actionTypes.WRITETODOSFAILED:
             return {
@@ -34,26 +33,24 @@ const reducer = (state = initialState, action) => {
         case actionTypes.DELETETODOSUCCESS:
             return {
                 ...state,
-                deleteSuccessMsg: action.msg,
+                todos: action.todos,
                 deleteFailedMsg: null
             }
         case actionTypes.DELETETODOFAILED:
             return {
                 ...state,
-                deleteFailedMsg: action.msg,
-                deleteSuccessMsg: null
+                deleteFailedMsg: action.msg
             }
         case actionTypes.PATCHTODOSUCCESS:
             return {
                 ...state,
-                patchSuccessMsg: action.msg,
+                todos: action.todos,
                 patchFailedMsg: null
             }
         case actionTypes.PATCHTODOFAILED:
             return {
                 ...state,
-                patchFailedMsg: action.msg,
-                patchSuccessMsg: null
+                patchFailedMsg: action.msg
             }
         default:
             return state;
