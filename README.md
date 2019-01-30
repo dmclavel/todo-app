@@ -21,7 +21,6 @@ To start the project in development mode, run:
 ```
 npm run dev or yarn dev
 ```
-```
 
 
 ## Deployment
