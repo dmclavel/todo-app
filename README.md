@@ -34,7 +34,7 @@ To test if production works properly, run:
 ```
 npm start or yarn start
 ```
-# Some available deployment sites
+### Some available deployment sites
 * [Heroku](https://www.heroku.com/what) - [Platform as a Service](https://searchcloudcomputing.techtarget.com/definition/Platform-as-a-Service-PaaS)
 * [DigitalOcean](https://www.digitalocean.com/) - [Infrastracture as a Service](https://searchcloudcomputing.techtarget.com/definition/Infrastructure-as-a-Service-IaaS)
 
