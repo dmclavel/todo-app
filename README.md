@@ -41,12 +41,9 @@ Add additional notes about how to deploy this on a live system
 
 * [React JS](https://reactjs.org/docs/getting-started.html) - The web framework used
 * [NPM](https://www.npmjs.com/) - Dependency Management
-* [Node JS](https://nodejs.org/en/docs/) - Back-end framework used
+* [Express](https://expressjs.com/) - Server framework for Node JS
+* [Node JS](https://nodejs.org/en/docs/) - Server framework used
 * [MongoDB](https://www.mongodb.com/what-is-mongodb) - Database used
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
@@ -64,6 +61,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Grazie mille to the Reactiflux community by inspiring me to strive for more and build websites for fun and with a purpose
