@@ -22,6 +22,9 @@ To start the project in development mode, run:
 npm run dev or yarn dev
 ```
 
+
+## Deployment
+
 Meanwhile, to ship the application for production. Build it first by running:
 
 ```
@@ -31,11 +34,9 @@ To test if production works properly, run:
 ```
 npm start or yarn start
 ```
-
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+### Some available deployment sites
+* [Heroku](https://www.heroku.com/what) - [Platform as a Service](https://searchcloudcomputing.techtarget.com/definition/Platform-as-a-Service-PaaS)
+* [DigitalOcean](https://www.digitalocean.com/) - [Infrastracture as a Service](https://searchcloudcomputing.techtarget.com/definition/Infrastructure-as-a-Service-IaaS)
 
 ## Built With
 
