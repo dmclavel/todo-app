@@ -6,7 +6,7 @@ const TextForm = styled.form`
     position: relative;
     height: 100%;
     animation: ${props => props.animation};
-    @keyframes onEntered {
+    @keyframes onEnteredTextBox {
         0% {
             opacity: 0;
             transform: translateY(-30vh);
@@ -20,7 +20,7 @@ const TextForm = styled.form`
             transform: translateY(0);
         }
     }
-    @keyframes onExited {
+    @keyframes onExitedTextBox {
         0% {
             opacity: 1;
         }
@@ -68,7 +68,7 @@ const textArea = props => {
     return (
         <Transition in={props.show} timeout={250} mountOnEnter unmountOnExit>
             {state => (
-                <TextForm onSubmit={props.submitted} animation={state === 'entered' || state === 'entering' ? 'onEntered 250ms ease-out forwards' : 'onExited 250ms ease-out forwards'}>
+                <TextForm onSubmit={props.submitted} animation={state === 'entered' || state === 'entering' ? 'onEnteredTextBox 250ms ease-out forwards' : 'onExitedTextBox 250ms ease-out forwards'}>
                     <TextWrapper placeholder="Create a todo." minlength="1" maxLength="100" spellCheck={true} value={props.value} onChange={props.changed} />
                     <TextAreaIcon className="material-icons" onClick={props.submitted}>
                         border_color

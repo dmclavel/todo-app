@@ -10,7 +10,7 @@ const IndvTransition = styled.div`
 `
 
 const List = ({ className, children }) => (
-    <TransitionGroup className={className} >
+    <TransitionGroup className={className}>
         {children}
     </TransitionGroup>
 );
@@ -50,24 +50,24 @@ const StyledList = styled(List)`
 
 const StyledElement = styled(Element)`
     display: inline-flex;
-    width: 90%;
+    width: 92%;
     height: 3rem;
-    background-color: #83AE98;
-    border-radius: 10px;
+    background-color: ${props => props.bgColor};
     align-items: center;
+    justify-items: center;
     margin: 0.8rem 1.2rem;
     word-break: break-all;
     overflow: auto;
     position: relative;
     ::-webkit-scrollbar-track {
-        border: 2px solid #ffc153;
+        border: 1px solid #ffc153;
         background-color: #355C7D;
     }
     ::-webkit-scrollbar {
         width: 0.5rem;
     }
     ::-webkit-scrollbar-thumb {
-        background-color: #355C7D;
+        background-color: #ffc153;
     }
 `
 
@@ -80,6 +80,13 @@ const TodoLabel = styled.h3`
     bottom: 100%;
     left: ${props => props.left};
     z-index: 10;
+`
+
+const CheckBoxLabel = styled.label`
+    display: inherit;
+    width: 60%;
+    height: 3rem;
+    align-items: center;
 `
 
 const HelperIcon = styled.i`
@@ -102,9 +109,9 @@ const inputInlineStyle = {
 const todoList = props => {
     const todoListContent = props.todos !== undefined ? props.todos.map(todo => {
         return !todo.completed ? (
-            <StyledElement key={todo._id}>
-                <Input type="checkbox" name="todo" style={inputInlineStyle} value="todo_val" changed={() => props.patched(todo._id, todo.completed)} />
-                <label htmlFor="todo_val" style={{padding: '0.5rem'}}> {todo.text} </label>
+            <StyledElement bgColor="#83AE98" key={todo._id}>
+                <Input type="checkbox" id="todo_val" style={inputInlineStyle} value="todo_val" changed={() => props.patched(todo._id, todo.completed)} />
+                <CheckBoxLabel htmlFor="todo_val"> {todo.text} </CheckBoxLabel>
                 <HelperIcon right="1rem" className="material-icons" onClick={() => props.deleted(todo._id)}> delete </HelperIcon>
                 <HelperIcon right="3rem" className="material-icons"> edit </HelperIcon>
             </StyledElement>
@@ -113,9 +120,9 @@ const todoList = props => {
 
     const completedList = props.todos !== undefined ? props.todos.map(todo => {
         return todo.completed ? (
-            <StyledElement key={todo._id}>
-                <Input type="checkbox" name="todo" style={inputInlineStyle} value="todo_val" changed={() => props.patched(todo._id, todo.completed)} checked={todo.completed} />
-                <label htmlFor="todo_val" style={{padding: '0.5rem'}}> {todo.text} </label>
+            <StyledElement bgColor="#F0B7A4" key={todo._id}>
+                <Input type="checkbox" id="todo_val" style={inputInlineStyle} value="todo_val" changed={() => props.patched(todo._id, todo.completed)} checked />
+                <CheckBoxLabel style={{textDecoration: 'line-through'}} htmlFor="todo_val"> {todo.text} </CheckBoxLabel>
                 <HelperIcon right="1rem" className="material-icons" onClick={() => props.deleted(todo._id)}> delete </HelperIcon>
                 <HelperIcon right="3rem" className="material-icons"> edit </HelperIcon>
             </StyledElement>

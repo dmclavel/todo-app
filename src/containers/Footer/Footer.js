@@ -51,34 +51,41 @@ const Link = styled.a`
 
 class Footer extends Component {
     render () {
-        return (
-            <FooterWrapper style={{
-                backgroundColor: this.props.uid && this.props.location.pathname !== '/' ? '#355C7D' : '',
-                top: this.props.uid && this.props.location.pathname !== '/' ? '85%' : '89%',
-                margin: this.props.uid && this.props.location.pathname !== '/' ? '-60px 0' : '0'
-            }}>
-                <FooterLeft>
-                    <LeftContainer>
-                        <ProductIcon src={GithubImg} alt="git-icon" />
-                        <Link href="https://github.com/dmclavel/todo-app" target="no_blank"> Official Github Repository </Link>
-                    </LeftContainer>
-                    <LeftContainer style={{marginTop: '20px'}}>
-                        <ProductIcon src={TwitterImg} alt="twitter-icon" />
-                        <Link href="https://twitter.com/DmcTodo" target="no_blank"> Todo App Twitter Page </Link>
-                    </LeftContainer>
-                    <LeftContainer style={{marginTop: '20px'}}>
-                        <ProductIcon src={EmailImg} alt="email-icon" />
-                        <Link href="mailto: dmclavel@up.edu.ph?Subject=User Feedback"> Send a feedback </Link>
-                    </LeftContainer>
-                </FooterLeft>
-            </FooterWrapper>
-        );
+        let footerContent = null;
+
+        if (!this.props.authListen && this.props.authDone)
+            footerContent = (
+                <FooterWrapper style={{
+                    backgroundColor: this.props.uid && this.props.location.pathname !== '/' ? '#355C7D' : '',
+                    top: this.props.uid && this.props.location.pathname !== '/' ? '85%' : '89%',
+                    margin: this.props.uid && this.props.location.pathname !== '/' ? '-60px 0' : '0'
+                }}>
+                    <FooterLeft>
+                        <LeftContainer>
+                            <ProductIcon src={GithubImg} alt="git-icon" />
+                            <Link href="https://github.com/dmclavel/todo-app" target="no_blank"> Official Github Repository </Link>
+                        </LeftContainer>
+                        <LeftContainer style={{marginTop: '20px'}}>
+                            <ProductIcon src={TwitterImg} alt="twitter-icon" />
+                            <Link href="https://twitter.com/DmcTodo" target="no_blank"> Todo App Twitter Page </Link>
+                        </LeftContainer>
+                        <LeftContainer style={{marginTop: '20px'}}>
+                            <ProductIcon src={EmailImg} alt="email-icon" />
+                            <Link href="mailto: dmcbusinessapps@gmail.com?Subject=User Feedback"> Send a feedback </Link>
+                        </LeftContainer>
+                    </FooterLeft>
+                </FooterWrapper>
+            );
+
+        return footerContent;
     }
 }
 
 const mapStateToProps = state => {
     return {
-        uid: state.user.uid
+        uid: state.user.uid,
+        authListen: state.user.authListen,
+        authDone: state.user.authDone
     }
 };
 

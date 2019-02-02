@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Transition } from 'react-transition-group';
 
 const SettingsWrapper = styled.div`
     display: flex;
@@ -14,6 +15,35 @@ const SettingsWrapper = styled.div`
     top: 140%;
     overflow: auto;
     z-index: 100;
+    animation: ${props => props.animation};
+    @keyframes onEnteredProfile {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes onExitedProfile {
+        0% {
+            opacity: 1;
+        }
+        25% {
+            opacity: 0.75;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        75% {
+            opacity: 0.25;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
 `
 
 const SettingsElement = styled.span`
@@ -45,11 +75,15 @@ const SettingsElementUnique = styled.span`
 
 const profileSettings = (props) => {
     return (
-        <SettingsWrapper>
-            <SettingsElement> {props.username} </SettingsElement>
-            <SettingsElement> {props.email} </SettingsElement>
-            <SettingsElementUnique onClick={props.clicked}> Logout </SettingsElementUnique>
-        </SettingsWrapper>
+        <Transition in={props.show} timeout={500} mountOnEnter unmountOnExit>
+            {state => (
+                <SettingsWrapper animation={state === 'entered' || state === 'entering' ? 'onEnteredProfile 500ms ease-out forwards' : 'onExitedProfile 500ms ease-in forwards'}>
+                    <SettingsElement> {props.username} </SettingsElement>
+                    <SettingsElement> {props.email} </SettingsElement>
+                    <SettingsElementUnique onClick={props.clicked}> Logout </SettingsElementUnique>
+                </SettingsWrapper>
+            )}
+        </Transition>  
     );
 };
 

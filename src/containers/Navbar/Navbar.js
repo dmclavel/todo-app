@@ -131,7 +131,7 @@ class Navbar extends Component {
                     </NavLeft>
                     <NavRight>
                         <NavProfileIcon onClick={this.triggerSettings} src={ProfileIcon} alt="man-icon" />
-                        {this.state.showSettings ? <ProfileSettings username={this.props.username} email={this.props.email} clicked={this.logout} /> : null}
+                        <ProfileSettings show={this.state.showSettings} username={this.props.username} email={this.props.email} clicked={this.logout} />
                     </NavRight>
                 </NavWrapper>
             );

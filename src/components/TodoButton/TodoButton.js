@@ -19,7 +19,6 @@ const TodoElement = styled.div`
 `
 
 const todoButton = ({ show, value, clicked, submitted, changed }) => {
-    console.log(show);
     return (<TodoElement>
         <Transition in={show} timeout={250} mountOnEnter unmountOnExit>
             {state => (
