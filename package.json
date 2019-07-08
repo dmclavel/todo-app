@@ -19,6 +19,7 @@
     "dev": "react-scripts start",
     "start": "serve -s build",
     "build": "react-scripts build",
+    "deploy": "aws s3 sync build/ s3://dmc-todo-app",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
